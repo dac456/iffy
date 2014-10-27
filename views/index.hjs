@@ -1,1 +1,9 @@
 <!--<iframe style="width:100%;height: 800px" src="/bt" frameborder="0"></iframe>-->
+<div class="row">
+    <div class="col-xs-2">
+        <a href="/bt#magnet:?xt=urn:btih:299c8ab171f489ad9c0c481da0191f1d6970f98c&dn=Neighbors+%282014%29+720p+BrRip+x264+-+YIFY&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com%3A1337"><image src="/images/neighbours.jpg" width="100%" height="100%" class="img-rounded" /></a>
+    </div>
+    <div class="col-xs-2">
+        <a href="/bt#magnet:?xt=urn:btih:6b37ab7b52375d6052022542af23f249549d3c37&dn=Let%27s+Be+Cops+%282014%29+720p+BrRip+x264+-+YIFY&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com%3A1337"><image src="/images/letsbecops.jpg" width="100%" height="100%" class="img-rounded" /></a>
+    </div>
+</div>

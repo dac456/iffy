@@ -2,6 +2,18 @@
 <html>
 	<head>
 		<title>{{ title }}</title>
+        <script src="javascripts/lib/jquery-1.11.1.js"></script>  
+        <script src="javascripts/lib/json2.js"></script>  
+        <script src="javascripts/lib/underscore.js"></script>  
+        <script src="javascripts/lib/backbone.js"></script>
+        <script src="javascripts/lib/jstorage.js"></script>
+        <script src="javascripts/lib/backbrace.js"></script>  
+          
+        <script src="javascripts/lib/btapp/plugin.btapp.js"></script>  
+        <script src="javascripts/lib/btapp/pairing.btapp.js"></script>  
+        <script src="javascripts/lib/btapp/client.btapp.js"></script>  
+        <script src="javascripts/lib/btapp/btapp.js"></script>        
+        <script src="/javascripts/rst.js"></script>
 		<link rel='stylesheet' href='/css/bootstrap.css' />
 		<!--<link rel='stylesheet' href='/css/bootstrap-theme.css' />-->
 	</head>

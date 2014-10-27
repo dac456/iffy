@@ -17,13 +17,14 @@
     
     <script src="javascripts/torrent.js"></script>
     
+    <link rel='stylesheet' href='/css/bootstrap.css' />
     <link href="video-js/video-js.css" rel="stylesheet">
 </head>
 
-<body>
+<body style="padding-top: 0px;">
 
     <script type="text/template" id="media_container_template">
-        <video id="main_player" class="video-js vjs-default-skin" controls autoplay preload="auto" width="auto" height="500" data-setup="{}">
+        <video id="main_player" class="video-js vjs-default-skin" controls autoplay preload="auto" width="auto" height="100%" data-setup="{}">
         </video>
     </script>
         

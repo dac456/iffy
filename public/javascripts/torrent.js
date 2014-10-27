@@ -11,14 +11,16 @@ $( function() {
             }, this);*/
             
             _btapp.live('add', function(add) {
-                add.torrent("magnet:?xt=urn:btih:299c8ab171f489ad9c0c481da0191f1d6970f98c&dn=Neighbors+%282014%29+720p+BrRip+x264+-+YIFY&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com%3A1337");
+                add.torrent(this.model.get('hash'));
                 
                 _btapp.live('torrent * properties', function(properties) {
                     var hash = properties.get('hash');
 
                     _btapp.live('torrent '+hash+' file *', function(file) {
                         var vid = file.get('name');
+                        alert(vid);
                         var ext = vid.substr(vid.lastIndexOf('.') + 1);
+                        alert(ext);
                         
                         if(ext == 'mp4') {
                             _btapp.live('torrent '+hash+' file '+vid+' properties streaming_url', this.ready, this);
@@ -40,6 +42,8 @@ $( function() {
         }
     });
     
+    var hash = window.location.hash.substring(1);
+    
     if(_btapp){
         _btapp.disconnect();
         _btapp = null;
@@ -52,7 +56,7 @@ $( function() {
     });
     
     var model = new Backbone.Model({
-        hash: undefined
+        hash: hash
     });
     
     var appView = new AppView({model:model});
