@@ -23,9 +23,7 @@
 <body>
 
     <script type="text/template" id="media_container_template">
-        <video id="main_player" class="video-js vjs-default-skin" controls
-                preload="auto" width="auto" height="500"
-                data-setup="{}">
+        <video id="main_player" class="video-js vjs-default-skin" controls autoplay preload="auto" width="auto" height="500" data-setup="{}">
         </video>
     </script>
         

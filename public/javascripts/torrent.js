@@ -6,27 +6,37 @@ $( function() {
         initialize: function() {
             this.template = _.template($('#media_container_template').html());
             
-            _btapp.on('add:torrent', function(torrents) {
-                torrents.each(function(torrent) {
-                    alert(torrent.get('properties').get('name'));
-                    torrent.remove();
-                });
-            });
+            /*_btapp.live('torrent *', function(torrent) {
+                torrent.remove();
+            }, this);*/
             
             _btapp.live('add', function(add) {
-                add.torrent("magnet:?xt=urn:btih:c5652490cd27672acb22bf36b953a85a13574bd1&dn=22+Jump+Street+%282014%29+720p+BrRip+x264+-+YIFY&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com%3A1337");
-            });
-            
-            _btapp.live('torrent * file * properties streaming_url', function(streaming_url, properties) {
-                //_btapp.get('torrent').get(properties.get('hash')).open_containing();
-                //alert('trying to get streamingurl');
-                alert(streaming_url);
-            });
+                add.torrent("magnet:?xt=urn:btih:299c8ab171f489ad9c0c481da0191f1d6970f98c&dn=Neighbors+%282014%29+720p+BrRip+x264+-+YIFY&tr=udp%3A%2F%2Ftracker.openbittorrent.com%3A80&tr=udp%3A%2F%2Ftracker.publicbt.com%3A80&tr=udp%3A%2F%2Ftracker.istole.it%3A6969&tr=udp%3A%2F%2Fopen.demonii.com%3A1337");
+                
+                _btapp.live('torrent * properties', function(properties) {
+                    var hash = properties.get('hash');
+
+                    _btapp.live('torrent '+hash+' file *', function(file) {
+                        var vid = file.get('name');
+                        var ext = vid.substr(vid.lastIndexOf('.') + 1);
+                        
+                        if(ext == 'mp4') {
+                            _btapp.live('torrent '+hash+' file '+vid+' properties streaming_url', this.ready, this);
+                        }
+                    }, this);
+                }, this);   
+                
+            }, this);                         
         },
         render: function() {
-            var test = _V_("main_player");
-            this.$el.html(this.template({}));
+            this.$el.html(this.template({})); 
             return this;
+        },
+        ready: function(url) { 
+            var player = _V_("main_player");
+            player.ready(_.bind(function() {
+                player.src(url);
+            }, this));
         }
     });
     
@@ -41,6 +51,11 @@ $( function() {
         product: "Torque"
     });
     
-    var appView = new AppView({model:_btapp});
+    var model = new Backbone.Model({
+        hash: undefined
+    });
+    
+    var appView = new AppView({model:model});
+    $('body').append(appView.render().el);
     
 });
