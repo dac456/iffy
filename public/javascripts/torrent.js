@@ -6,25 +6,28 @@ $( function() {
         initialize: function() {
             this.template = _.template($('#media_container_template').html());
             
-            /*_btapp.live('torrent *', function(torrent) {
-                torrent.remove();
-            }, this);*/
-            
             _btapp.live('add', function(add) {
-                add.torrent(this.model.get('hash'));
+                add.torrent({
+                    url: this.model.get('hash'),
+                    priority: Btapp.TORRENT.PRIORITY.METADATA_ONLY
+                });
                 
                 _btapp.live('torrent * properties', function(properties) {
                     var hash = properties.get('hash');
 
                     _btapp.live('torrent '+hash+' file *', function(file) {
                         var vid = file.get('name');
-                        alert(vid);
                         var ext = vid.substr(vid.lastIndexOf('.') + 1);
-                        alert(ext);
                         
-                        if(ext == 'mp4') {
+                        if(ext.toUpperCase() !== "MP4") {
+                            file.get('properties').save({
+                                priority: 0
+                            });
+                        }
+                        else {
                             _btapp.live('torrent '+hash+' file '+vid+' properties streaming_url', this.ready, this);
                         }
+                        
                     }, this);
                 }, this);   
                 

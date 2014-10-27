@@ -1,11 +1,7 @@
 
-/*
- * GET home page.
- */
-
 exports.index = function(req, res){
   res.render('layouts/default', { 
-      title: 'Express',
+      title: 'Iffy',
       partials: {
           content: 'index'
       } 
