@@ -5,6 +5,7 @@
 
 var express = require('express');
 var index = require('./routes/index');
+var db = require('./db')
 
 var http = require('http');
 var path = require('path');
@@ -31,6 +32,8 @@ app.use(cookieSession({
 	keys: ['key1', 'key2']
 }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+db.use('iffy')
 
 // development only
 // development error handler
