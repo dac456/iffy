@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 
-<div class="row">
+<!--<div class="row">
     {{#entries}}
     <div class="col-xs-2">
         <a href="/bt/#{{maglink}}"><img src="{{image}}" alt="{{title}}" width="128px" height="192px" class="img-rounded" /></a>
     </div>
     {{/entries}}
-</div>
+</div>-->
+<center>
+        <a href="/channel/yts/1080p/1"><img src="/images/yts_logo.png" class="img-rounded" /></a>
+        <a href="#"><img src="/images/EZTV.png" class="img-rounded" /></a>
+</center>

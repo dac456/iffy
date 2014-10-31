@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+
+<div class="container">
+    <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <form method="post" action="/channel/yts/quality" role="form" class="form-inline">
+                        <div class="form-group">
+                            <label for="quality"  class="sr-only">Quality: </label>
+                            <select id="quality" name="quality" class="form-control">
+                                {{#_1080p}}
+                                <option value="720p">720p</option>
+                                <option value="1080p" selected>1080p</option>
+                                {{/_1080p}}
+                                {{^_1080p}}
+                                <option value="720p" selected>720p</option>
+                                <option value="1080p">1080p</option>
+                                {{/_1080p}}           
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary">Go</button>
+                    </form>
+                </div>
+            </div> 
+    </div>
+    <div class="row">
+        <div class="col-xs-2">
+            {{#_1080p}}
+            <a href="/channel/yts/1080p/{{prevPage}}"><img src="/images/back_icon.png" width="128px" height="192px" /></a>
+            {{/_1080p}}
+            {{^_1080p}}
+            <a href="/channel/yts/720p/{{prevPage}}"><img src="/images/back_icon.png" width="128px" height="192px" /></a>
+            {{/_1080p}}            
+        </div>
+        
+        {{#entries}}
+        <div class="col-xs-2">
+            <a href="/bt/#{{maglink}}"><img src="{{image}}" alt="{{title}}" width="128px" height="192px" class="img-rounded" /></a>
+        </div>
+        {{/entries}}
+        
+        <div class="col-xs-2">
+            {{#_1080p}}
+            <a href="/channel/yts/1080p/{{nextPage}}"><img src="/images/forward_icon.png" width="128px" height="192px" /></a>
+            {{/_1080p}}
+            {{^_1080p}}
+            <a href="/channel/yts/720p/{{nextPage}}"><img src="/images/forward_icon.png" width="128px" height="192px" /></a>
+            {{/_1080p}}            
+        </div>        
+    </div>
+</div>

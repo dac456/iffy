@@ -1,8 +1,7 @@
-var https = require('https');
 var db = require('../db');
 
 exports.index = function(req, res){
-    var entries = [];
+    /*var entries = [];
     https.get("https://yts.re/api/list.json?limit=50&sort=alphabet&order=asc", function(yts_res) {
         var data = '';
 
@@ -34,7 +33,7 @@ exports.index = function(req, res){
         console.log("Got error: " + e.message);
     });
     //TODO: this will eventually not be the index page
-    /*var entries = [];
+    var entries = [];
     db.getTpb(function(rows) {
         for(var i = 0; i < rows.length; i++) {
             entries.push({
@@ -52,6 +51,12 @@ exports.index = function(req, res){
             } 
         });
     });*/
+    res.render('layouts/default', {
+        title: 'Iffy',
+        partials: {
+            content: 'index'
+        }
+    });
 };
 
 exports.bt = function(req, res){

@@ -5,6 +5,7 @@
 
 var express = require('express');
 var index = require('./routes/index');
+var channel = require('./routes/channel');
 var db = require('./db')
 
 var http = require('http');
@@ -60,6 +61,8 @@ app.use(function(err, req, res, next) {
 
 app.get('/', index.index);
 app.get('/bt', index.bt);
+app.post('/channel/yts/quality', channel.ytsQuality);
+app.get('/channel/yts/:quality/:page', channel.yts);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
