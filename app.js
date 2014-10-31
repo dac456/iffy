@@ -62,6 +62,7 @@ app.use(function(err, req, res, next) {
 app.get('/', index.index);
 app.get('/bt', index.bt);
 app.post('/channel/yts/quality', channel.ytsQuality);
+app.post('/channel/yts/:quality/search', channel.ytsSearch);
 app.get('/channel/yts/:quality/:page', channel.yts);
 
 http.createServer(app).listen(app.get('port'), function(){
