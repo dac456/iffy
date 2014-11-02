@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-2">
+            <!--<div style="position:fixed;">-->
+                <center>
+                <img src="{{image}}" alt="{{title}}" width="128px" height="128px" class="img-rounded" />
+                <h3>{{showTitle}}</h3>
+                </center>
+            <!--</div>-->
+        </div>
+        <div class="col-md-8">
+            <ul class="list-group">
+                {{#episodes}}
+                <li class="list-group-item"><a href="/bt#{{magnet}}">{{show}}, Season {{seasonNumber}}, Episode {{episodeNumber}}</a></li>
+                {{/episodes}}
+            </ul>
+        </div>
+    </div>
+</div>

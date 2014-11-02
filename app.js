@@ -64,6 +64,9 @@ app.get('/bt', index.bt);
 app.post('/channel/yts/quality', channel.ytsQuality);
 app.post('/channel/yts/:quality/search', channel.ytsSearch);
 app.get('/channel/yts/:quality/:page', channel.yts);
+app.get('/channel/eztv', channel.eztv);
+app.get('/channel/eztv/:showId/:slug', channel.eztvShow);
+app.post('/channel/eztv/search', channel.eztvSearch);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

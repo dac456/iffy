@@ -1,4 +1,5 @@
 var https = require('https');
+var eztv = require('eztv');
 
 exports.yts = function(req, res) {
     var entries = [];
@@ -104,4 +105,74 @@ exports.ytsSearch = function(req, res) {
     }).on('error', function(e) {
         console.log("Got error: " + e.message);
     }); 
+};
+
+exports.eztv = function(req, res) {
+    var entries = [];
+    
+    eztv.getShows({}, function(error, results) {
+        for(var i = 0; i < results.length; i++) {
+            var slug = results[i]['slug'];
+            var imgName = slug.replace(/-/g, '_');
+            var imgUrl = "http://ezimg.it/t/"+imgName+"/main.png"
+            entries.push({
+                title: results[i]['title'],
+                slug: slug,
+                image: imgUrl,
+                showId: results[i]['id']
+            });
+        }
+        
+        res.render('layouts/default', { 
+            title: 'Iffy',
+            entries: entries,
+            partials: {
+                content: 'eztv'
+            } 
+        });        
+    });
+};
+
+exports.eztvSearch = function(req, res) {
+    var entries = [];
+    
+    eztv.getShows({query:req.body.keywords}, function(error, results) {
+        for(var i = 0; i < results.length; i++) {
+            var slug = results[i]['slug'];
+            var imgName = slug.replace(/-/g, '_');
+            var imgUrl = "http://ezimg.it/t/"+imgName+"/main.png"
+            entries.push({
+                title: results[i]['title'],
+                slug: slug,
+                image: imgUrl,
+                showId: results[i]['id']
+            });
+        }
+        
+        res.render('layouts/default', { 
+            title: 'Iffy',
+            entries: entries,
+            partials: {
+                content: 'eztv'
+            } 
+        });        
+    });    
 };    
+
+exports.eztvShow = function(req, res) {
+    eztv.getShowEpisodes(req.params.showId, function(error, results) {
+        var slug = req.params.slug;
+        var imgName = slug.replace(/-/g, '_');
+        var imgUrl = "http://ezimg.it/t/"+imgName+"/main.png"
+            
+        res.render('layouts/default', { 
+            title: 'Iffy',
+            showTitle: results['title'],
+            image: imgUrl,
+            episodes: results['episodes'],
+            partials: {
+                content: 'eztv_episodes'
+            } 
+        }); 
+    });
+};
