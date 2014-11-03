@@ -1,21 +1,33 @@
 <!DOCTYPE html>
 
+<style type="text/css">
+    body {
+        background-image: url('{{fanart}}');
+        background-attachment: fixed;
+    }
+</style>
+
 <div class="container">
     <div class="row">
-        <div class="col-md-2">
-            <!--<div style="position:fixed;">-->
-                <center>
-                <img src="{{image}}" alt="{{title}}" width="128px" height="128px" class="img-rounded" />
-                <h3>{{showTitle}}</h3>
-                </center>
-            <!--</div>-->
-        </div>
-        <div class="col-md-8">
+        
+            <div class="panel panel-default" style="opacity: 0.8;">
+                <div class="panel-body">
+                    
+                    <div class="col-md-2"><img src="{{image}}" alt="{{title}}" width="128px" height="192px" class="img-rounded" /></div>
+                    <h3>{{showTitle}}</h3>
+                    <p>{{overview}}</p>
+                    
+                </div>
+            </div>
+        
+    </div>
+    <div class="row">
+
             <ul class="list-group">
                 {{#episodes}}
-                <li class="list-group-item"><a href="/bt#{{magnet}}">{{show}}, Season {{seasonNumber}}, Episode {{episodeNumber}}</a></li>
+                <li class="list-group-item"><a href="/bt#{{magnet}}">Season {{seasonNumber}}, Episode {{episodeNumber}}</a></li>
                 {{/episodes}}
             </ul>
-        </div>
+        
     </div>
 </div>

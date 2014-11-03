@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 
+<style type="text/css">
+    body {
+        background-image: url('/images/bg2.jpg');
+        background-attachment: fixed;
+        background-size: cover;
+    }
+</style>
+
 <!--<div class="panel panel-default">
     <div class="panel-heading">Create user</div>
         <div class="panel-body">
@@ -23,7 +31,7 @@
 <div class="alert alert-danger">Incorrect username or password.</div>
 {{/isError}}
 
-<div class="panel panel-default">
+<div class="panel panel-default" style="opacity: 0.9;">
     <div class="panel-heading">Login</div>
         <div class="panel-body">
             <form method="post" action="/user/authenticate" role="form">

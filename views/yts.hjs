@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 
+<style type="text/css">
+    body {
+        background-image: url('{{fanart}}');
+        background-attachment: fixed;
+    }
+</style>
+
 <div class="container">
     <div class="row">
             <div class="panel panel-default">
@@ -21,7 +28,7 @@
                         
                         <button type="submit" class="btn btn-primary">Go</button>
                     </form>
-                    <form method="post" action="/channel/yts/{{quality}}/search" class="form-inline pull-right" role="search">
+                    <form method="post" action="/channel/yts/search/{{quality}}" class="form-inline pull-right" role="search">
                         <div class="form-group">
                           <input type="text" name="keywords" class="form-control" placeholder="Search">
                         </div>
@@ -33,25 +40,26 @@
     <div class="row">
         <div class="col-xs-2">
             {{#_1080p}}
-            <a href="/channel/yts/1080p/{{prevPage}}"><img src="/images/back_icon.png" width="128px" height="192px" /></a>
+            <a href="/channel/yts/browse/1080p/{{prevPage}}"><img src="/images/back_icon.png" width="128px" height="192px" /></a>
             {{/_1080p}}
             {{^_1080p}}
-            <a href="/channel/yts/720p/{{prevPage}}"><img src="/images/back_icon.png" width="128px" height="192px" /></a>
+            <a href="/channel/yts/browse/720p/{{prevPage}}"><img src="/images/back_icon.png" width="128px" height="192px" /></a>
             {{/_1080p}}            
         </div>
         
         {{#entries}}
         <div class="col-xs-2">
-            <a href="/bt/#{{maglink}}"><img src="{{image}}" alt="{{title}}" width="128px" height="192px" class="img-rounded" /></a>
+            <!--<a href="/bt/#{{maglink}}"><img src="{{image}}" alt="{{title}}" width="128px" height="192px" class="img-rounded" /></a>-->
+            <a href="/channel/yts/movie/{{movieId}}"><img src="{{image}}" alt="{{title}}" width="128px" height="192px" class="img-rounded" /></a>
         </div>
         {{/entries}}
         
         <div class="col-xs-2">
             {{#_1080p}}
-            <a href="/channel/yts/1080p/{{nextPage}}"><img src="/images/forward_icon.png" width="128px" height="192px" /></a>
+            <a href="/channel/yts/browse/1080p/{{nextPage}}"><img src="/images/forward_icon.png" width="128px" height="192px" /></a>
             {{/_1080p}}
             {{^_1080p}}
-            <a href="/channel/yts/720p/{{nextPage}}"><img src="/images/forward_icon.png" width="128px" height="192px" /></a>
+            <a href="/channel/yts/browse/720p/{{nextPage}}"><img src="/images/forward_icon.png" width="128px" height="192px" /></a>
             {{/_1080p}}            
         </div>        
     </div>

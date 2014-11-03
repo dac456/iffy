@@ -66,8 +66,9 @@ app.get('/bt', index.bt);
 
 app.get('/channel', index.channel);
 app.post('/channel/yts/quality', session.restrictUser, channel.ytsQuality);
-app.post('/channel/yts/:quality/search', session.restrictUser, channel.ytsSearch);
-app.get('/channel/yts/:quality/:page', session.restrictUser, channel.yts);
+app.post('/channel/yts/search/:quality', session.restrictUser, channel.ytsSearch);
+app.get('/channel/yts/browse/:quality/:page', session.restrictUser, channel.yts);
+app.get('/channel/yts/movie/:movieId', session.restrictUser, channel.ytsMovie);
 app.get('/channel/eztv', session.restrictUser, channel.eztv);
 app.get('/channel/eztv/:showId/:slug', session.restrictUser, channel.eztvShow);
 app.post('/channel/eztv/search', session.restrictUser, channel.eztvSearch);
