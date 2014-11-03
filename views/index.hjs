@@ -1,13 +1,42 @@
 <!DOCTYPE html>
 
-<!--<div class="row">
-    {{#entries}}
-    <div class="col-xs-2">
-        <a href="/bt/#{{maglink}}"><img src="{{image}}" alt="{{title}}" width="128px" height="192px" class="img-rounded" /></a>
+<!--<div class="panel panel-default">
+    <div class="panel-heading">Create user</div>
+        <div class="panel-body">
+            <form method="post" action="/admin/user/create" role="form">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" class="form-control" placeholder="username" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" class="form-control" placeholder="password" />
+                </div>
+                <button type="submit" class="btn btn-default">Create User</button>
+            </form>
+        </div>
     </div>
-    {{/entries}}
 </div>-->
-<center>
-        <a href="/channel/yts/720p/1"><img src="/images/yts_logo.png" class="img-rounded" /></a>
-        <a href="/channel/eztv"><img src="/images/EZTV.png" class="img-rounded" /></a>
-</center>
+
+{{#isError}}
+<br/ >
+<div class="alert alert-danger">Incorrect username or password.</div>
+{{/isError}}
+
+<div class="panel panel-default">
+    <div class="panel-heading">Login</div>
+        <div class="panel-body">
+            <form method="post" action="/user/authenticate" role="form">
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" name="username" class="form-control" placeholder="username" />
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" name="password" class="form-control" placeholder="password" />
+                </div>
+                <button type="submit" class="btn btn-default">Login</button>
+            </form>
+        </div>
+    </div>
+</div>

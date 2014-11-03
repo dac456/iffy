@@ -5,6 +5,8 @@
 
 var express = require('express');
 var index = require('./routes/index');
+var session = require('./routes/session');
+var admin = require('./routes/admin');
 var channel = require('./routes/channel');
 var db = require('./db')
 
@@ -61,12 +63,20 @@ app.use(function(err, req, res, next) {
 
 app.get('/', index.index);
 app.get('/bt', index.bt);
-app.post('/channel/yts/quality', channel.ytsQuality);
-app.post('/channel/yts/:quality/search', channel.ytsSearch);
-app.get('/channel/yts/:quality/:page', channel.yts);
-app.get('/channel/eztv', channel.eztv);
-app.get('/channel/eztv/:showId/:slug', channel.eztvShow);
-app.post('/channel/eztv/search', channel.eztvSearch);
+
+app.get('/channel', index.channel);
+app.post('/channel/yts/quality', session.restrictUser, channel.ytsQuality);
+app.post('/channel/yts/:quality/search', session.restrictUser, channel.ytsSearch);
+app.get('/channel/yts/:quality/:page', session.restrictUser, channel.yts);
+app.get('/channel/eztv', session.restrictUser, channel.eztv);
+app.get('/channel/eztv/:showId/:slug', session.restrictUser, channel.eztvShow);
+app.post('/channel/eztv/search', session.restrictUser, channel.eztvSearch);
+
+app.get('/login/err', index.loginError);
+
+//app.post('/admin/user/create', admin.createUser);
+app.post('/user/authenticate', session.create);
+app.get('/user/logout', session.destroy);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

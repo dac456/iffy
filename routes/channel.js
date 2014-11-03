@@ -33,9 +33,15 @@ exports.yts = function(req, res) {
             }
             
             var nextPage = parseInt(req.params.page) + 1;
+            
+            var loggedIn = false;
+            if(req.session.userId != undefined) {
+                loggedIn = true;
+            }
 
             res.render('layouts/default', { 
                 title: 'Iffy',
+                loggedIn: loggedIn,
                 entries: entries,
                 quality: req.params.quality,
                 _1080p: _1080p,
@@ -89,9 +95,15 @@ exports.ytsSearch = function(req, res) {
             }
             
             var nextPage = parseInt(req.params.page) + 1;
+            
+            var loggedIn = false;
+            if(req.session.userId != undefined) {
+                loggedIn = true;
+            }            
 
             res.render('layouts/default', { 
                 title: 'Iffy',
+                loggedIn: loggedIn,
                 entries: entries,
                 quality: req.params.quality,
                 _1080p: _1080p,
@@ -123,8 +135,14 @@ exports.eztv = function(req, res) {
             });
         }
         
+        var loggedIn = false;
+        if(req.session.userId != undefined) {
+            loggedIn = true;
+        }        
+    
         res.render('layouts/default', { 
             title: 'Iffy',
+            loggedIn: loggedIn,
             entries: entries,
             partials: {
                 content: 'eztv'
@@ -149,8 +167,14 @@ exports.eztvSearch = function(req, res) {
             });
         }
         
+        var loggedIn = false;
+        if(req.session.userId != undefined) {
+            loggedIn = true;
+        }         
+        
         res.render('layouts/default', { 
             title: 'Iffy',
+            loggedIn: loggedIn,
             entries: entries,
             partials: {
                 content: 'eztv'
@@ -164,9 +188,15 @@ exports.eztvShow = function(req, res) {
         var slug = req.params.slug;
         var imgName = slug.replace(/-/g, '_');
         var imgUrl = "http://ezimg.it/t/"+imgName+"/main.png"
+        
+        var loggedIn = false;
+        if(req.session.userId != undefined) {
+            loggedIn = true;
+        }         
             
         res.render('layouts/default', { 
             title: 'Iffy',
+            loggedIn: loggedIn,
             showTitle: results['title'],
             image: imgUrl,
             episodes: results['episodes'],

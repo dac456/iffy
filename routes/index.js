@@ -51,14 +51,53 @@ exports.index = function(req, res){
             } 
         });
     });*/
-    res.render('layouts/default', {
-        title: 'Iffy',
-        partials: {
-            content: 'index'
-        }
-    });
+    var loggedIn = false;
+    if(req.session.userId != undefined) {
+        res.redirect('/channel');
+    }     
+    else {
+        res.render('layouts/default', {
+            title: 'Iffy',
+            loggedIn: loggedIn,
+            isError: false,
+            partials: {
+                content: 'index'
+            }
+        });
+    }
 };
 
 exports.bt = function(req, res){
     res.render('bt');
+};
+
+exports.channel = function(req, res) {
+    var loggedIn = false;
+    if(req.session.userId != undefined) {
+        loggedIn = true;
+    }     
+        
+    res.render('layouts/default', {
+        title: 'Iffy',
+        loggedIn: loggedIn,
+        partials: {
+            content: 'channel_list'
+        }
+    });
+};
+
+exports.loginError = function(req, res) {
+    var loggedIn = false;
+    if(req.session.userId != undefined) {
+        loggedIn = true;
+    }     
+        
+    res.render('layouts/default', {
+        title: 'Iffy',
+        loggedIn: loggedIn,
+        isError: true,
+        partials: {
+            content: 'index'
+        }
+    });
 };
