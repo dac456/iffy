@@ -17,7 +17,7 @@
 		<link rel='stylesheet' href='/css/bootstrap.css' />
 		<!--<link rel='stylesheet' href='/css/bootstrap-theme.css' />-->
 	</head>
-	<body>
+	<body style="background-image: url('/images/bg.jpg'); background-size: cover;">
 		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 			<div class="container-fluid">
 				<div class="navbar-header">
