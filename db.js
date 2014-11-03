@@ -6,8 +6,8 @@ var pool = undefined;
 module.exports.use = function(name) {
 	pool = mysql.createPool({
 		host: 'localhost',
-		user: 'root',
-		password: '***REMOVED***',
+		user: 'iffy',
+		password: 'Iffytest5+',
 		database: name
 	});
 };
