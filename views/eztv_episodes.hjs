@@ -4,10 +4,23 @@
     body {
         background-image: url('{{fanart}}');
         background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;        
     }
 </style>
 
 <div class="container">
+    <div class="row">
+        <div class="panel panel-default"  style="opacity: 0.8;">
+            <div class="panel-body">
+                <a href="javascript: history.go(-1)">
+                    <button type="button" class="btn btn-default btn-lg">
+                        <span class="glyphicon glyphicon-circle-arrow-left"></span> Back
+                    </button>
+                </a>
+            </div>
+        </div>
+    </div>    
     <div class="row">
         
             <div class="panel panel-default" style="opacity: 0.8;">

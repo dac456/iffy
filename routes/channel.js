@@ -78,6 +78,11 @@ exports.ytsMovie = function(req, res) {
             slug = slug.replace('(', '');
             slug = slug.replace(')', '');
             slug = slug.replace("-1080p", '');
+            
+            // Replace special ampersand codes
+            slug = slug.replace("&#xb0;", '');
+            
+            slug = encodeURI(slug);
             console.log(slug);
             
             var maglink = obj['TorrentMagnetUrl'];
@@ -119,6 +124,8 @@ exports.ytsMovie = function(req, res) {
                         } 
                     });
                 });
+            }).on('error', function(e) {
+                console.log("Got error: " + e.message);
             });
         });
     }).on('error', function(e) {
@@ -143,16 +150,22 @@ exports.ytsSearch = function(req, res) {
 
         yts_res.on('end',function(){
             var obj = JSON.parse(data);
-            for(var i = 0; i < parseInt(obj['MovieCount']); i++) {
-                if(obj['MovieList'][i]['Quality'] === req.params.quality) {
-                    entries.push({
-                        movieId: obj['MovieList'][i]['MovieID'],
-                        title: obj['MovieList'][i]['MovieTitle'],
-                        maglink: obj['MovieList'][i]['TorrentMagnetUrl'],
-                        image: obj['MovieList'][i]['CoverImage']
-                    });
+            var i = 0;
+            if(obj['MovieList'] !== undefined) {
+                while(obj['MovieList'][i] !== undefined) {
+                //for(var i = 0; i < parseInt(obj['MovieCount']); i++) {
+                    if(obj['MovieList'][i]['Quality'] === req.params.quality) {
+                        entries.push({
+                            movieId: obj['MovieList'][i]['MovieID'],
+                            title: obj['MovieList'][i]['MovieTitle'],
+                            maglink: obj['MovieList'][i]['TorrentMagnetUrl'],
+                            image: obj['MovieList'][i]['CoverImage']
+                        });
+                    }
+                    i++;
                 }
             }
+            //}
             
             var _1080p = true;
             if(req.params.quality === '720p') {
@@ -193,32 +206,34 @@ exports.eztv = function(req, res) {
     var entries = [];
     
     eztv.getShows({}, function(error, results) {
-        for(var i = 0; i < results.length; i++) {
-            var slug = results[i]['slug'];
-            var imgName = slug.replace(/-/g, '_');
-            var imgUrl = "http://ezimg.it/t/"+imgName+"/main.png";
+        if(results !== null) {
+            for(var i = 0; i < results.length; i++) {
+                var slug = results[i]['slug'];
+                var imgName = slug.replace(/-/g, '_');
+                var imgUrl = "http://ezimg.it/t/"+imgName+"/main.png";
+                
+                entries.push({
+                    title: results[i]['title'],
+                    slug: slug,
+                    image: imgUrl,
+                    showId: results[i]['id']
+                });
+            }
             
-            entries.push({
-                title: results[i]['title'],
-                slug: slug,
-                image: imgUrl,
-                showId: results[i]['id']
-            });
-        }
+            var loggedIn = false;
+            if(req.session.userId != undefined) {
+                loggedIn = true;
+            }        
         
-        var loggedIn = false;
-        if(req.session.userId != undefined) {
-            loggedIn = true;
+            res.render('layouts/default', { 
+                title: 'Iffy',
+                loggedIn: loggedIn,
+                entries: entries,
+                partials: {
+                    content: 'eztv'
+                } 
+            });
         }        
-    
-        res.render('layouts/default', { 
-            title: 'Iffy',
-            loggedIn: loggedIn,
-            entries: entries,
-            partials: {
-                content: 'eztv'
-            } 
-        });        
     });
 };
 
@@ -256,47 +271,49 @@ exports.eztvSearch = function(req, res) {
 
 exports.eztvShow = function(req, res) {
     eztv.getShowEpisodes(req.params.showId, function(error, results) {
-        var slug = req.params.slug;
-        var imgName = slug.replace(/-/g, '_');
-        var imgUrl = "http://ezimg.it/t/"+imgName+"/main.png"
-        
-        var loggedIn = false;
-        if(req.session.userId != undefined) {
-            loggedIn = true;
-        }
-        
-        http.get('http://api.trakt.tv/show/summary.json/'+traktKey+'/'+slug, function(trakt_res) {
-            var data = '';
+        if(results !== null) {
+            var slug = req.params.slug;
+            var imgName = slug.replace(/-/g, '_');
+            var imgUrl = "http://ezimg.it/t/"+imgName+"/main.png"
+            
+            var loggedIn = false;
+            if(req.session.userId != undefined) {
+                loggedIn = true;
+            }
+            
+            http.get('http://api.trakt.tv/show/summary.json/'+traktKey+'/'+slug, function(trakt_res) {
+                var data = '';
 
-            trakt_res.on('data', function (chunk){
-                data += chunk;
-            });
+                trakt_res.on('data', function (chunk){
+                    data += chunk;
+                });
 
-            trakt_res.on('end',function(){
-                var poster = '';
-                var fanart = '';
-                var overview = '';
-                
-                var obj = JSON.parse(data);
-                if(obj !== undefined && obj['images'] !== undefined) {
-                    poster = obj['images']['poster'];
-                    fanart = obj['images']['fanart'];
-                    overview = obj['overview'];
-                }
-                
-                res.render('layouts/default', { 
-                    title: 'Iffy',
-                    loggedIn: loggedIn,
-                    showTitle: results['title'],
-                    image: poster,
-                    fanart: fanart,
-                    overview: overview,
-                    episodes: results['episodes'],
-                    partials: {
-                        content: 'eztv_episodes'
-                    } 
-                });                 
-            });
-        });         
+                trakt_res.on('end',function(){
+                    var poster = '';
+                    var fanart = '';
+                    var overview = '';
+                    
+                    var obj = JSON.parse(data);
+                    if(obj !== undefined && obj['images'] !== undefined) {
+                        poster = obj['images']['poster'];
+                        fanart = obj['images']['fanart'];
+                        overview = obj['overview'];
+                    }
+                    
+                    res.render('layouts/default', { 
+                        title: 'Iffy',
+                        loggedIn: loggedIn,
+                        showTitle: results['title'],
+                        image: poster,
+                        fanart: fanart,
+                        overview: overview,
+                        episodes: results['episodes'],
+                        partials: {
+                            content: 'eztv_episodes'
+                        } 
+                    });                 
+                });
+            }); 
+        }            
     });
 };
