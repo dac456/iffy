@@ -4,12 +4,22 @@ var easyPbkdf2 = require("easy-pbkdf2")();
 var pool = undefined;
 
 module.exports.use = function(name) {
-	pool = mysql.createPool({
-		host: 'localhost',
-		user: 'iffy',
-		password: 'Iffytest5+',
-		database: name
-	});
+    if(process.env.NODE_ENV !== 'development') {
+        pool = mysql.createPool({
+            host: 'localhost',
+            user: 'iffy',
+            password: 'Iffytest5+',
+            database: name
+        });
+    }
+    else{
+        pool = mysql.createPool({
+            host: 'localhost',
+            user: 'root',
+            password: '***REMOVED***',
+            database: name
+        });        
+    }
 };
 
 module.exports.getTpb = function(callback) {
