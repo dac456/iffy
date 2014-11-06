@@ -2,14 +2,16 @@
 
 <style type="text/css">
     body {
-        background-image: url('{{fanart}}');
+        background-image: url('/images/movie_bg.jpg');
         background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
     }
 </style>
 
 <div class="container">
     <div class="row">
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="opacity: 0.95;">
                 <div class="panel-body">
                     <form method="post" action="/channel/yts/quality" role="form" class="form-inline pull-left">
                         <div class="form-group">
@@ -38,7 +40,7 @@
             </div> 
     </div>
     <div class="row">
-        <div class="panel panel-default">
+        <div class="panel panel-default" style="opacity: 0.95;">
             <div class="panel-body">
                 <div class="col-xs-2">
                     {{#_1080p}}

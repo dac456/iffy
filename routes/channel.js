@@ -77,6 +77,10 @@ exports.ytsMovie = function(req, res) {
             slug = slug.replace(/ /g, '-');
             slug = slug.replace('(', '');
             slug = slug.replace(')', '');
+            slug = slug.replace(':', '');
+            /*if(slug.indexOf(':') !== -1) {
+                slug = slug.replace(slug.substring(0, slug.indexOf(':')+2), '');
+            }*/
             slug = slug.replace("-1080p", '');
             
             // Replace special ampersand codes
@@ -281,6 +285,14 @@ exports.eztvShow = function(req, res) {
                 loggedIn = true;
             }
             
+            //Filter episodes to those that are encoded as x264
+            var entries = [];
+            for(var i = 0; i < results['episodes'].length; i++) {
+                if(results['episodes'][i]['extra'].indexOf("x264") !== -1) {
+                    entries.push(results['episodes'][i]);
+                }
+            }
+            
             http.get('http://api.trakt.tv/show/summary.json/'+traktKey+'/'+slug, function(trakt_res) {
                 var data = '';
 
@@ -307,13 +319,13 @@ exports.eztvShow = function(req, res) {
                         image: poster,
                         fanart: fanart,
                         overview: overview,
-                        episodes: results['episodes'],
+                        episodes: entries,
                         partials: {
                             content: 'eztv_episodes'
                         } 
                     });                 
                 });
             }); 
-        }            
+        }           
     });
 };

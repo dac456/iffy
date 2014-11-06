@@ -1,8 +1,17 @@
 <!DOCTYPE html>
 
+<style type="text/css">
+    body {
+        background-image: url('/images/tv_bg.jpg');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
 <div class="container">
     <div class="row">
-            <div class="panel panel-default">
+            <div class="panel panel-default" style="opacity: 0.95;">
                 <div class="panel-body">
                     <form method="post" action="/channel/eztv/search" class="form-inline pull-right" role="search">
                         <div class="form-group">
@@ -26,7 +35,7 @@
         <!--<div class="col-xs-2">
             <a href="/channel/eztv/{{showId}}/{{slug}}"><img src="{{image}}" alt="{{title}}" width="128px" height="128px" class="img-rounded" /></a>
         </div>-->
-        <ul class="list-group">
+        <ul class="list-group" style="opacity: 0.95;">
             {{#entries}}
             <li class="list-group-item"><a href="/channel/eztv/{{showId}}/{{slug}}">{{title}}</a></li>
             {{/entries}}

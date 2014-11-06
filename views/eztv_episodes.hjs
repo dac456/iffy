@@ -38,7 +38,7 @@
 
             <ul class="list-group">
                 {{#episodes}}
-                <li class="list-group-item"><a href="/bt#{{magnet}}">Season {{seasonNumber}}, Episode {{episodeNumber}}</a></li>
+                <li class="list-group-item"><a href="/bt#{{magnet}}">Season {{seasonNumber}}, Episode {{episodeNumber}}</a><p class="pull-right">{{extra}}</p></li>
                 {{/episodes}}
             </ul>
         

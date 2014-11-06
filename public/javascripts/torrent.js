@@ -19,7 +19,7 @@ $( function() {
                         var vid = file.get('name');
                         var ext = vid.substr(vid.lastIndexOf('.') + 1);
                         
-                        if(ext.toUpperCase() !== "MP4") {
+                        if(ext.toUpperCase() !== "MP4" && ext.toUpperCase() !== "MKV") {
                             file.get('properties').save({
                                 priority: 0
                             });

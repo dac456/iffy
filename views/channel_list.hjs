@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 
-<center>
-        <a href="/channel/yts/browse/720p/1"><img src="/images/yts_logo.png" class="img-rounded" /></a>
-        <a href="/channel/eztv"><img src="/images/EZTV.png" class="img-rounded" /></a>
-</center>
+<style type="text/css">
+    body {
+        background-image: url('/images/channel_bg.jpg');
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+
+<div class="panel panel-default"  style="opacity: 0.95;">
+    <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item"><a href="/channel/yts/browse/720p/1">YTS</a></li>
+            <li class="list-group-item"><a href="/channel/eztv">EZTV</a>
+        </ul>
+    </div>
+</div>
