@@ -288,8 +288,10 @@ exports.eztvShow = function(req, res) {
             //Filter episodes to those that are encoded as x264
             var entries = [];
             for(var i = 0; i < results['episodes'].length; i++) {
-                if(results['episodes'][i]['extra'].indexOf("x264") !== -1) {
-                    entries.push(results['episodes'][i]);
+                if(results['episodes'][i]['extra'] !== undefined) {
+                    if(results['episodes'][i]['extra'].indexOf("x264") !== -1) {
+                        entries.push(results['episodes'][i]);
+                    }
                 }
             }
             
