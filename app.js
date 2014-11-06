@@ -62,9 +62,9 @@ app.use(function(err, req, res, next) {
 });
 
 app.get('/', index.index);
-app.get('/bt', index.bt);
+app.get('/bt', session.restrictUser, index.bt);
 
-app.get('/channel', index.channel);
+app.get('/channel', session.restrictUser, index.channel);
 app.post('/channel/yts/quality', session.restrictUser, channel.ytsQuality);
 app.post('/channel/yts/search/:quality', session.restrictUser, channel.ytsSearch);
 app.get('/channel/yts/browse/:quality/:page', session.restrictUser, channel.yts);
