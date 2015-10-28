@@ -16,7 +16,7 @@ module.exports.use = function(name) {
         pool = mysql.createPool({
             host: 'localhost',
             user: 'root',
-            password: '***REMOVED***',
+            password: '',
             database: name
         });        
     }
